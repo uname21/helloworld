@@ -1,6 +1,6 @@
 {
     "name": "Hello world",
-    "version": "2.6",
+    "version": "2.7",
     "description": "",
     "permissions": [
         "activeTab", "storage", "declarativeContent", "tabs", "background"

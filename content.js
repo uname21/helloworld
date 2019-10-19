@@ -30,7 +30,8 @@ function main() {
         });
     }
     function confirm(data, count = 5) {
-        let amount = parseInt($('span.account_total_bets').eq(0).text());
+        const obj_amount = $('span.account_total_bets').eq(0);
+        let amount = parseInt(obj_amount.text());
         if (amount > 0 || count < 0) return;
 
         console.log('processing')
@@ -40,6 +41,7 @@ function main() {
             obj = $('div#order input[type="submit"]');
             if (obj.length > 0) {
                 obj.eq(0).trigger('click');
+                obj_amount.text(1);
             }
             // window.setTimeout(confirm, 2000, count - 1);
         }, 1000)
@@ -83,7 +85,9 @@ function main() {
             confirm(data);
         }
         else {
-            appendScript('new_refresh', "$('a.fn-refresh-bet').eq(0).click()");
+            if (Math.random() >= 0.5) {
+                appendScript('new_refresh', "$('a.fn-refresh-bet').eq(0).click()");
+            }
         }
     }
 
