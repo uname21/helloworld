@@ -1,3 +1,4 @@
+const interval = 5000;
 function main() {
     function select(data) {
         $(".betgroup a").each(function (i, obj) {
@@ -74,10 +75,11 @@ function main() {
     }
     const app = function (data) {
         let times = data.time.match(/(\d{2})/g).map(x => parseInt(x));
-        let curr_times =
-            $('span[class="close-time CloseTime"]')
-                .eq(0).text().match(/(\d{2})/g).map(x => parseInt(x));
-        if (curr_times.every((x, i) => { x <= times[i] })) {
+        let curr_times = $('span[class="close-time CloseTime"]').eq(0).text().match(/(\d{2})/g)
+        if (!curr_times) return;
+        curr_times = curr_times.map(x => parseInt(x));
+        // curr_times[1] -= interval;
+        if (curr_times.every((x, i) => x <= times[i])) {
             confirm(data);
         }
         else {
@@ -87,7 +89,7 @@ function main() {
 
     chrome.storage.sync.get(['type', 'quantity', 'time', 'amount', 'exclude'], function (data) {
         if (data.type) {
-            let id = setInterval(app, 5000, data);
+            let id = setInterval(app, interval, data);
             let obj = {}
             obj['interval_id_' + data.type] = id
             chrome.storage.sync.set(obj)
