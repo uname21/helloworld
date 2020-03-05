@@ -1,5 +1,5 @@
-const interval = 5000;
 function main() {
+    const interval = 7000;
     function select(data) {
         $(".betgroup a").each(function (i, obj) {
             $(obj).removeClass('selected')
@@ -17,8 +17,17 @@ function main() {
                     col = index - j;
                     if (col < 0) col = col + 10;
                     col = col % 10;
-                } else {
+                } else if (direction == 'right') {
                     col = (index + j) % 10;
+                } else {
+                    mid = quantity / 2;
+                    if (j < mid) {
+                        col = index - j - 1;
+                        if (col < 0) col = col + 10;
+                        col = col % 10;
+                    } else {
+                        col = (index + j + 1) % 10;
+                    }
                 }
                 if (col < 5) {
                     $(".betgroup").eq(col).find("a").eq(row - 1 + 6).addClass('selected')

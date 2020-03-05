@@ -17,7 +17,12 @@ chrome.runtime.onInstalled.addListener(function () {
   });
 });
 
-chrome.runtime.onMessageExternal.addListener(
-  function(request, sender, sendResponse) {
-    console.log(request, sender, sendResponse)
-  });
+chrome.alarms.onAlarm.addListener(function () {
+  console.log('Alarm run')
+  // chrome.tabs.query({ url: match_url }, function (tabs) {
+  //   let tab_id = tabs[0].id
+  //   chrome.tabs.executeScript(tab_id, { file: 'login.js' }, function (result) {
+  //     console.log(result);
+  //   });
+  // });
+});
